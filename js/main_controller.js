@@ -86,6 +86,7 @@ app.controller('MainController', ['$http', '$scope', '$filter', function($http, 
 	//display
 	$scope.global.minimal = false;
 	$scope.global.show_settings = false;
+	$scope.notice = false;
 
 	//settings
 	$scope.settings = localStorage['watty-alarms-settings'] ? JSON.parse(localStorage['watty-alarms-settings']) : {};
@@ -308,6 +309,10 @@ app.controller('MainController', ['$http', '$scope', '$filter', function($http, 
 			$scope.global.playing = false;
 		}
 	}
+	$scope.show_notice = function(message) {
+		$scope.notice_message = message;
+		$scope.notice = true;
+	}
 
 	//play alarm on time
 	$scope.$watch('global.time', function(time){
@@ -349,7 +354,7 @@ app.controller('MainController', ['$http', '$scope', '$filter', function($http, 
 		if(playing){
 			audio.play();
 			alarm_fallback = setTimeout(function() {
-				alert('You missed your alarm!');
+				$scope.show_notice('You missed your alarm!');
 				$scope.global.run_fallback();
 			}, 300000);
 		}else{

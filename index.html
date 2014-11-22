@@ -238,6 +238,13 @@
 
 	<!-- Hidden audio -->
 	<audio id="audio" src="{{global.song}}" loop></audio>
+
+	<div id="notice" ng-show="notice">
+		<div>
+			<p>test{{notice_message}}</p>
+			<button ng-click="notice = false">Close</button>
+		</div>
+	</div>
 </body>
 
 </html>
